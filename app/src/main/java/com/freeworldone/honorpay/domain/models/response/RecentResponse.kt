@@ -1,3 +1,3 @@
 package com.freeworldone.honorpay.domain.models.response
 
-class RecentResponse
+class RecentResponse(val honors: List<HonorResponse>, val users: List<UserResponse>)

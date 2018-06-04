@@ -1,3 +1,3 @@
 package com.freeworldone.honorpay.domain.models.response
 
-class UploadProfilePicResponse
+class UploadProfilePicResponse(val img_url: String? = null)

@@ -1,3 +1,3 @@
 package com.freeworldone.honorpay.domain.models.response
 
-class RegisterGhostResponse
+class RegisterGhostResponse(val id: Int? = null)
