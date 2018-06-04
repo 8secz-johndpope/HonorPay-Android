@@ -12,11 +12,31 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        resValue "string", "app_version", "v" + versionName
+        resValue "string", "app_name", "HonorPay"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", "DevHonorPay"
+            resValue "bool", "isDebug", "true"
+            debuggable true
             minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-debug.pro'
+            testProguardFile('proguard-rules-test.pro')
+        }
+        release {
+            resValue "bool", "isDebug", "false"
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
