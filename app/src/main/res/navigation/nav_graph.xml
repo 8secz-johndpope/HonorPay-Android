@@ -6,34 +6,34 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="com.freeworldone.honorpay.ui.login.LoginFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.login.LoginFragment"
         android:label="fragment_title_screen"
         tools:layout="@layout/fragment_login">
     </fragment>
     <fragment
         android:id="@+id/payHonor"
-        android:name="com.freeworldone.honorpay.ui.payhonor.PayHonorFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.payhonor.PayHonorFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_pay_honor">
 
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.freeworldone.honorpay.ui.profile.ProfileFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.profile.ProfileFragment"
         android:label="fragment_leaderboard"
         tools:layout="@layout/fragment_profile">
 
     </fragment>
     <fragment
         android:id="@+id/recent"
-        android:name="com.freeworldone.honorpay.ui.recent.RecentFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.recent.RecentFragment"
         android:label="fragment_match"
         tools:layout="@layout/fragment_recent">
 
     </fragment>
     <fragment
         android:id="@+id/signup"
-        android:name="com.freeworldone.honorpay.ui.signup.SignupFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.signup.SignupFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_signup">
 
