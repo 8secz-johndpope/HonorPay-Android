@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.domain.RestAdapter
+import com.freeworldone.honorpay.domain.models.response.RecentResponse
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(){
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +38,16 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        RestAdapter.recent().enqueue(object: Callback<RecentResponse>{
+            override fun onFailure(call: Call<RecentResponse>?, t: Throwable?) {
+
+            }
+
+            override fun onResponse(call: Call<RecentResponse>?, response: Response<RecentResponse>?) {
+
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navHostFragment).navigateUp()

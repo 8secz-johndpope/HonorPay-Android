@@ -12,9 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 object RestAdapter {
-    var authToken: String? = null
-        private set
-
     private val api: Api = Retrofit.Builder()
             .baseUrl("https://honorpay.org/")
 //            .addCallAdapterFactory(RxJava2CallAdapter.Factory(Schedulers.io()))
