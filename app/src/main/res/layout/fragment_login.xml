@@ -11,17 +11,93 @@
             type="com.freeworldone.honorpay.ui.screens.login.LoginViewModel"/>
     </data>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nsv"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".ui.screens.login.LoginFragment">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/clLogin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.screens.login.LoginFragment">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/hint_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:singleLine="true"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/bLogin"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputPassword"/>
+
+        <Button
+            android:id="@+id/bRegister"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="0dp"
+            android:text="@string/btn_create_account"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bLogin"/>
+
+        <Button
+            android:id="@+id/bForgotPassword"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:minHeight="0dp"
+            android:text="@string/btn_forgot_password"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bRegister"/>
+    </android.support.constraint.ConstraintLayout>
 </layout>

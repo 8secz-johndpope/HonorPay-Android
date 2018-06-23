@@ -25,6 +25,9 @@
     <string name="notify_when_honored">Notify me when someone Honors me</string>
     <string name="send_weekly_reminder">Send me a weekly reminder</string>
     <string name="btn_create_profile">Create profile</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_create_account">Create a new account</string>
+    <string name="btn_forgot_password">Forgot password?</string>
 
     <string-array name="countries_array">
         <item>Country</item>
