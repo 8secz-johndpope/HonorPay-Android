@@ -33,9 +33,9 @@
     </fragment>
     <fragment
         android:id="@+id/signup"
-        android:name="com.freeworldone.honorpay.ui.screens.signup.SignupFragment"
+        android:name="com.freeworldone.honorpay.ui.screens.register.RegisterFragment"
         android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_signup">
+        tools:layout="@layout/fragment_register">
 
     </fragment>
 </navigation>
