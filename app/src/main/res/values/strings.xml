@@ -31,6 +31,7 @@
     <string name="tab_received">Received</string>
     <string name="tab_awarded">Awarded</string>
     <string name="tab_profile">Profile</string>
+    <string name="honored_by">Honored by %s</string>
 
     <string-array name="countries_array">
         <item>Country</item>

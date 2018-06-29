@@ -24,7 +24,6 @@ class LoginResponse(val auth_token: String? = null,
                     val ghost_creator: Int? = null,
                     val last_active: Date? = null,
                     val last_honoree: Int? = null,
-                    val honorpie: Float? = null,
                     val img_url: String? = null,
                     val honors: List<HonorResponse>? = null,
                     val users: List<UserResponse>? = null)

@@ -10,10 +10,11 @@
             type="com.freeworldone.honorpay.ui.screens.recent.RecentViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/clRecent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvRecent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.screens.recent.RecentFragment">
-    </android.support.constraint.ConstraintLayout>
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:context=".ui.screens.recent.RecentFragment"
+        tools:listitem="@layout/item_honor"/>
 </layout>

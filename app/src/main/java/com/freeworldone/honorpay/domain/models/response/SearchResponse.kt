@@ -21,5 +21,4 @@ class SearchResponse(val id: Int? = null,
                      val honors_awards: Int? = null,
                      val ghost_creator: Int? = null,
                      val last_active: Date? = null,
-                     val last_honoree: Int? = null,
-                     val honorpie: Float? = null)
+                     val last_honoree: Int? = null)

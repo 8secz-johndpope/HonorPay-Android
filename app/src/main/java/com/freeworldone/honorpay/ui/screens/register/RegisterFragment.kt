@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.databinding.FragmentRegisterBinding
 
 
 class RegisterFragment : Fragment() {
@@ -17,15 +17,11 @@ class RegisterFragment : Fragment() {
 
     private lateinit var viewModel: RegisterViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
+        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        binding.vm = viewModel
+        binding.setLifecycleOwner(this)
+        return binding.root
     }
-
 }

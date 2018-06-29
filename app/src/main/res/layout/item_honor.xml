@@ -5,21 +5,24 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="item"
-            type="com.freeworldone.honorpay.ui.screens.profile.HonorItem"/>
+            type="com.freeworldone.honorpay.ui.base.items.HonorItem"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/cItemHonor"
+        android:id="@+id/cItemRecent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivHonoredPerson"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/acc_honored_pic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,35 +30,91 @@
             tools:srcCompat="@tools:sample/avatars"/>
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tvHonoredName"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_width="0dp"
-            android:drawableStart="@drawable/ic_menu_left"
-            android:text="@{item.name}"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:drawableStart="@{item.received ? @drawable/ic_menu_left_24dp : @drawable/ic_menu_right_24dp}"
+            android:focusable="true"
+            android:text="@{item.honoredName}"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
             app:layout_constraintEnd_toStartOf="@+id/tvTimeAgo"
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toTopOf="parent"
+            tools:drawableStart="@drawable/ic_menu_left_24dp"
             tools:text="@tools:sample/full_names"/>
+
+        <TextView
+            android:id="@+id/tvHonoredBy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:text="@{@string/honored_by(item.honoredBy)}"
+            android:visibility="@{item.honoredBy == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@+id/tvHonoredName"
+            app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
+            app:layout_constraintTop_toBottomOf="@+id/tvHonoredName"
+            tools:text="@tools:sample/full_names"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/black_t87"
+            android:visibility="@{item.message.isEmpty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
+            app:layout_constraintTop_toBottomOf="@+id/tvHonoredBy"/>
 
         <TextView
             android:id="@+id/tvMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:drawableBottom="@{item.messageExpanded ? @drawable/ic_expand_less_24dp : @drawable/ic_expand_more_24dp}"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:maxLines="@{item.messageExpanded ? -1 : 4}"
             android:text="@{item.message}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
-            app:layout_constraintTop_toBottomOf="@+id/tvName"
-            tools:text="@tools:sample/lorem"/>
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            tools:drawableBottom="@drawable/ic_expand_more_24dp"
+            tools:drawableTint="@color/black_t54"
+            tools:maxLines="4"
+            tools:text="@tools:sample/lorem/random"/>
 
         <TextView
             android:id="@+id/tvTimeAgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:text="@{item.timeAgo}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="3hrs ago"/>
+
+        <TextView
+            android:id="@+id/tvHonorTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_bullseye_18dp"
+            android:text="@{item.honorTotal}"
+            app:layout_constraintEnd_toEndOf="@+id/ivHonoredPerson"
+            app:layout_constraintStart_toStartOf="@+id/ivHonoredPerson"
+            app:layout_constraintTop_toBottomOf="@+id/ivHonoredPerson"
+            tools:text="13"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

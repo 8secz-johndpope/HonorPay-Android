@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.databinding.FragmentPayHonorBinding
 
 
 class PayHonorFragment : Fragment() {
@@ -17,15 +17,11 @@ class PayHonorFragment : Fragment() {
 
     private lateinit var viewModel: PayHonorViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_pay_honor, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel = ViewModelProviders.of(this@PayHonorFragment).get(PayHonorViewModel::class.java)
+        val binding = FragmentPayHonorBinding.inflate(inflater, container, false)
+        binding.vm = viewModel
+        binding.setLifecycleOwner(this)
+        return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PayHonorViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.domain.models.response.RecentResponse
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,10 +18,13 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding.vm = viewModel
+        binding.setLifecycleOwner(this)
 
-        bottomNav.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_profile -> {
                     true
