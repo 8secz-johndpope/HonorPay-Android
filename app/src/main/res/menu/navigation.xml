@@ -2,23 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_profile"
+        android:id="@id/profile"
         android:icon="@drawable/ic_account_circle_24dp"
         android:title="@string/title_profile"/>
 
     <item
-        android:id="@+id/nav_pay_honor"
+        android:id="@id/payHonor"
         android:icon="@drawable/ic_brightness_high_24dp"
         android:title="@string/title_pay_honor"/>
 
     <item
-        android:id="@+id/nav_recent"
+        android:id="@id/recent"
         android:icon="@drawable/ic_history_24dp"
         android:title="@string/title_recent"/>
 
-    <item
-        android:id="@+id/nav_about_us"
-        android:icon="@drawable/ic_language_24dp"
-        android:title="@string/title_about_us"/>
-
+    <!--<item-->
+    <!--android:id="@id/about_us"-->
+    <!--android:icon="@drawable/ic_language_24dp"-->
+    <!--android:title="@string/title_about_us"/>-->
 </menu>

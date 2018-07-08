@@ -1,27 +1,23 @@
 package com.freeworldone.honorpay.ui.screens.login
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.freeworldone.honorpay.databinding.FragmentLoginBinding
+import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
+    private val viewModel: LoginViewModel by lazy { getViewModel<LoginViewModel>() }
+    private lateinit var binding: FragmentLoginBinding
 
-    private lateinit var viewModel: LoginViewModel
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProviders.of(this@LoginFragment).get(LoginViewModel::class.java)
-        val binding = FragmentLoginBinding.inflate(inflater, container, false)
-        binding.vm = viewModel
-        binding.setLifecycleOwner(this)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+            FragmentLoginBinding.inflate(inflater, container, false).also {
+                binding = it
+                binding.vm = viewModel
+                binding.setLifecycleOwner(this)
+            }.root
 }

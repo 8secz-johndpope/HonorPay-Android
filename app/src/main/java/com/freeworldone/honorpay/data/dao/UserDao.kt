@@ -10,7 +10,7 @@ import com.freeworldone.honorpay.data.models.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
-    fun get(id: Int): LiveData<User>
+    fun get(id: Int): LiveData<User?>
 
     @Query("SELECT * FROM user")
     fun getAll(): LiveData<List<User>>

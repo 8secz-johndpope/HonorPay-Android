@@ -6,22 +6,22 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
+    //TODO: Fix crash- viewModel requires arguments
+    private val viewModel: ProfileViewModel by lazy {  ViewModelProviders.of(this).get(ProfileViewModel::class.java) }
+    private lateinit var binding: FragmentProfileBinding
 
-    private lateinit var viewModel: ProfileViewModel
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProviders.of(this@ProfileFragment).get(ProfileViewModel::class.java)
-        val binding = FragmentProfileBinding.inflate(inflater, container, false)
-        binding.vm = viewModel
-        binding.setLifecycleOwner(this)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+            FragmentProfileBinding.inflate(inflater, container, false).also {
+                binding = it
+                binding.vm = viewModel
+                binding.setLifecycleOwner(this)
+                if(viewModel.user.value == null) findNavController().navigate(R.id.login)
+            }.root
 }

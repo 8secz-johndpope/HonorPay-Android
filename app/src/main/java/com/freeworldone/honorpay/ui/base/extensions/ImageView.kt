@@ -1,4 +1,4 @@
-package com.freeworldone.honorpay.ui.base.util
+package com.freeworldone.honorpay.ui.base.extensions
 
 import android.databinding.BindingAdapter
 import android.widget.ImageView

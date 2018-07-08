@@ -2,40 +2,69 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            app:startDestination="@+id/login">
+            app:startDestination="@id/payHonor">
 
     <fragment
         android:id="@+id/login"
         android:name="com.freeworldone.honorpay.ui.screens.login.LoginFragment"
-        android:label="fragment_title_screen"
+        android:label="Login"
         tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/register">
+            <argument
+                android:name="isGhost"
+                android:defaultValue="false"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/payHonor"
         android:name="com.freeworldone.honorpay.ui.screens.payhonor.PayHonorFragment"
-        android:label="fragment_register"
+        android:label="Pay honor"
         tools:layout="@layout/fragment_pay_honor">
 
+        <action
+            android:id="@+id/action_payHonor_to_login"
+            app:destination="@id/login"/>
+        <action
+            android:id="@+id/action_payHonor_to_register"
+            app:destination="@id/register">
+            <argument
+                android:name="isGhost"
+                android:defaultValue="true"/>
+        </action>
+        <action
+            android:id="@+id/action_payHonor_to_profile"
+            app:destination="@id/profile"/>
     </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.freeworldone.honorpay.ui.screens.profile.ProfileFragment"
-        android:label="fragment_leaderboard"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile">
 
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/login"/>
     </fragment>
     <fragment
         android:id="@+id/recent"
         android:name="com.freeworldone.honorpay.ui.screens.recent.RecentFragment"
-        android:label="fragment_match"
+        android:label="Recent"
         tools:layout="@layout/fragment_recent">
 
+        <action
+            android:id="@+id/action_recent_to_profile"
+            app:destination="@id/profile"/>
     </fragment>
     <fragment
-        android:id="@+id/signup"
+        android:id="@+id/register"
         android:name="com.freeworldone.honorpay.ui.screens.register.RegisterFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_register">
 
+        <argument
+            android:name="isGhost"
+            android:defaultValue="false"/>
     </fragment>
 </navigation>

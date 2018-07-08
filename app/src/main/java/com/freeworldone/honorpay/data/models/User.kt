@@ -14,6 +14,7 @@ data class User(@PrimaryKey
                 val attributes: String,
                 val email: String,
                 val signature: String, //1000 byte text
+                val img_url: String?,
                 val joined: Long?,
                 val type: Int, //2 = confirmed, 1 = unconfirmed, 0 = ghost, -1 = in memoriam
                 val public_figure: Boolean, //1 = yes

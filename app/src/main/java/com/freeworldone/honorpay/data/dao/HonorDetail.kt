@@ -1,7 +1,10 @@
 package com.freeworldone.honorpay.data.dao
 
+import com.freeworldone.honorpay.ui.base.items.HonorItem
+import java.util.*
+
 class HonorDetail(
-//        val id: Int,
+        val honor_id: Int,
         val user_from: Int,
         val user_to: Int,
         val message: String,
@@ -17,4 +20,16 @@ class HonorDetail(
         val to_last_name: String,
         val to_nickname: String,
         val to_type: Int,
-        val to_honors_received: Int)
+        val to_honors_received: Int){
+
+    fun toHonorItem() = HonorItem(
+            id = honor_id,
+            honoredBy = "$from_first_name $from_last_name${if(from_nickname.isBlank()) "" else " ($from_nickname)"}",
+            honoredName = "$to_first_name $to_last_name${if(to_nickname.isBlank()) "" else " ($to_nickname)"}",
+            honorTotal = to_honors_received,
+            imageUrl = null,
+            isMessageExpanded = false,
+            isReceived = true,
+            message = message,
+            timeAgo = Date(timestamp).toString())
+}

@@ -15,8 +15,14 @@ interface HonorDao {
     @Query("SELECT * FROM honor")
     fun getAll(): LiveData<List<Honor>>
 
-    @Query("SELECT user_from,user_to,message,timestamp,uFrom.first_name as from_first_name,uFrom.last_name as from_last_name,uFrom.nickname as from_nickname,uFrom.type as from_type,uFrom.honors_received as from_honors_received,uTo.first_name as to_first_name,uTo.last_name as to_last_name,uTo.nickname as to_nickname,uTo.type as to_type,uTo.honors_received as to_honors_received FROM honor LEFT JOIN user uFrom ON user_from = uFrom.id LEFT JOIN user uTo ON user_to = uTo.id ORDER BY timestamp DESC LIMIT 15")
+    @Query("SELECT user_from,user_to,message,timestamp,honor.id as honor_id,uFrom.first_name as from_first_name,uFrom.last_name as from_last_name,uFrom.nickname as from_nickname,uFrom.type as from_type,uFrom.honors_received as from_honors_received,uTo.first_name as to_first_name,uTo.last_name as to_last_name,uTo.nickname as to_nickname,uTo.type as to_type,uTo.honors_received as to_honors_received FROM honor LEFT JOIN user uFrom ON user_from = uFrom.id LEFT JOIN user uTo ON user_to = uTo.id ORDER BY timestamp DESC LIMIT 15")
     fun getAllRecent(): LiveData<List<HonorDetail>>
+
+    @Query("SELECT user_from,user_to,message,timestamp,honor.id as honor_id,uFrom.first_name as from_first_name,uFrom.last_name as from_last_name,uFrom.nickname as from_nickname,uFrom.type as from_type,uFrom.honors_received as from_honors_received,uTo.first_name as to_first_name,uTo.last_name as to_last_name,uTo.nickname as to_nickname,uTo.type as to_type,uTo.honors_received as to_honors_received FROM honor LEFT JOIN user uFrom ON user_from = uFrom.id LEFT JOIN user uTo ON user_to = uTo.id WHERE user_from = :id ORDER BY timestamp DESC")
+    fun getAllFromUser(id: Int): LiveData<List<HonorDetail>>
+
+    @Query("SELECT user_from,user_to,message,timestamp,honor.id as honor_id,uFrom.first_name as from_first_name,uFrom.last_name as from_last_name,uFrom.nickname as from_nickname,uFrom.type as from_type,uFrom.honors_received as from_honors_received,uTo.first_name as to_first_name,uTo.last_name as to_last_name,uTo.nickname as to_nickname,uTo.type as to_type,uTo.honors_received as to_honors_received FROM honor LEFT JOIN user uFrom ON user_from = uFrom.id LEFT JOIN user uTo ON user_to = uTo.id WHERE user_to = :id ORDER BY timestamp DESC")
+    fun getAllToUser(id: Int): LiveData<List<HonorDetail>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(honor: Honor)
