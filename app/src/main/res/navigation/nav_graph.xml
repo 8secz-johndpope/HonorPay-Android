@@ -46,6 +46,10 @@
         <action
             android:id="@+id/action_profile_to_login"
             app:destination="@id/login"/>
+        <argument
+            android:name="userId"
+            android:defaultValue="-1"
+            app:type="integer"/>
     </fragment>
     <fragment
         android:id="@+id/recent"

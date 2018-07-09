@@ -11,92 +11,51 @@
             type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/clProfile"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.screens.profile.ProfileFragment">
 
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llProfile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{vm.user.region}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/cities"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvKnownFor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{vm.user.attributes}"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLocation"
-            tools:text="Swordfighting, Cosplay"/>
-
-        <TextView
-            android:id="@+id/tvProfileData"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bHonor"
-            tools:text="JOINED: 10 months ago\nHONORS: 0\nLAST 12 MONTHS: 0\nAWARDED: 1\nLAST ACTIVE: 10 months ago\nACCOUNT: Confirmed profile"/>
-
-        <Button
-            android:id="@+id/bHonor"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvKnownFor"
-            tools:text="Honor Anna Mckenzie"/>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayoutHonor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProfileData">
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabReceived"
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayoutHonor"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_received"/>
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProfileData"
+                pager="@{(vpProfile)}">
 
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabAwarded"
-                android:layout_width="wrap_content"
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabAbout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_about"/>
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabHonorsReceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_honors_received"/>
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabHonorsAwarded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_honors_awarded"/>
+            </android.support.design.widget.TabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpProfile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_awarded"/>
-        </android.support.design.widget.TabLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvHonor"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayoutHonor"
-            tools:listitem="@layout/item_honor"/>
-
-    </android.support.constraint.ConstraintLayout>
+                app:items="@{vm.items}"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

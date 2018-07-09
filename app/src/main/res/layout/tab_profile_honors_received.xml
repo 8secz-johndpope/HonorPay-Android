@@ -7,15 +7,13 @@
 
         <variable
             name="vm"
-            type="com.freeworldone.honorpay.ui.screens.recent.RecentViewModel"/>
+            type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel"/>
     </data>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvRecent"
+        android:id="@+id/rvHonorsReceived"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:items="@{vm.recentHonors}"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:context=".ui.screens.recent.RecentFragment"
+        app:items="@{vm.honorsReceived}"
         tools:listitem="@layout/item_honor"/>
 </layout>
