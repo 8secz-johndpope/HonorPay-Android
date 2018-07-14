@@ -13,7 +13,7 @@ import retrofit2.http.*
 
 object RestAdapter {
     private val api: Api = Retrofit.Builder()
-            .baseUrl("https://honorpay.org/")
+            .baseUrl("https://honorpay.org/honorpay/")
 //            .addCallAdapterFactory(RxJava2CallAdapter.Factory(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(Gson())) //TODO: check gson initialization & settings
             .client(OkHttpClient.Builder().apply {

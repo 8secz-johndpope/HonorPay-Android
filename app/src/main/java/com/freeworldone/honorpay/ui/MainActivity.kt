@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.setLifecycleOwner(this)
         binding.bottomNav.setupWithNavController(navController)
+        binding.collapsingToolbar.setupWithNavController(binding.toolbar, navController)
         setSupportActionBar(binding.toolbar)
-        binding.collapsingToolbar.isTitleEnabled = false
         setupActionBarWithNavController(navController)
 
         RestAdapter.recent().enqueue(object : Callback<RecentResponse> {
