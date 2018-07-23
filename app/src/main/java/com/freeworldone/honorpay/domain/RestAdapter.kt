@@ -4,6 +4,7 @@ import com.freeworldone.honorpay.BuildConfig
 import com.freeworldone.honorpay.domain.models.body.*
 import com.freeworldone.honorpay.domain.models.response.*
 import com.google.gson.Gson
+import com.ihsanbal.logging.LoggingInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -13,19 +14,24 @@ import retrofit2.http.*
 
 object RestAdapter {
     private val api: Api = Retrofit.Builder()
-            .baseUrl("https://honorpay.org/honorpay/")
+            .baseUrl("https://honorpay.org/api/")
 //            .addCallAdapterFactory(RxJava2CallAdapter.Factory(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(Gson())) //TODO: check gson initialization & settings
             .client(OkHttpClient.Builder().apply {
-                addInterceptor { chain ->
-                    val request = chain.request()
-                    chain.proceed(request.newBuilder()
-                            .apply {
-                                header("X-HonorPay-Platform", "Android")
-                                header("X-HonorPay-Version", BuildConfig.VERSION_NAME)
-                                method(request.method(), request.body())
-                            }.build())
-                }
+//                addInterceptor { chain ->
+//                    val request = chain.request()
+//                    chain.proceed(request.newBuilder()
+//                            .apply {
+//                                header("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
+//                                method(request.method(), request.body())
+//                            }.build())
+//                }
+                addInterceptor(LoggingInterceptor.Builder()
+                        .loggable(BuildConfig.DEBUG)
+                        .addHeader("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
+//                        .setLevel(Level.BODY)
+//                        .log(Platform.INFO)
+                        .build())
                 if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             }.build())
             .build()
@@ -40,7 +46,7 @@ object RestAdapter {
         fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
         @GET("recent")
-        fun recent(): Call<RecentResponse>
+        fun recent(@Query("page") page: Int): Call<RecentResponse>
 
         @POST("register")
         fun register(@Body registerBody: RegisterBody): Call<RegisterResponse>
@@ -65,7 +71,7 @@ object RestAdapter {
 
     fun login(loginBody: LoginBody): Call<LoginResponse> = api.login(loginBody)
 
-    fun recent(): Call<RecentResponse> = api.recent()
+    fun recent(): Call<RecentResponse> = api.recent(1)
 
     fun register(registerBody: RegisterBody): Call<RegisterResponse> = api.register(registerBody)
 
