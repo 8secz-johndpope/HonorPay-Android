@@ -10,16 +10,17 @@ import androidx.navigation.ui.setupWithNavController
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
-import com.freeworldone.honorpay.domain.models.response.RecentResponse
+import com.freeworldone.honorpay.ui.base.extensions.disposeBy
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.freeworldone.honorpay.ui.base.extensions.log
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by lazy { getViewModel<MainViewModel>() }
     private val navController: NavController by lazy { findNavController(R.id.navHostFragment) }
+    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +32,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
 
-        RestAdapter.recent().enqueue(object : Callback<RecentResponse> {
-            override fun onFailure(call: Call<RecentResponse>?, t: Throwable?) {
+        RestAdapter.recent()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { it.forEach { log("onSubscribe: $it") } },
+                        { log("onError: $it") })
+                .disposeBy(disposables)
+    }
 
-            }
-
-            override fun onResponse(call: Call<RecentResponse>?, response: Response<RecentResponse>?) {
-
-            }
-        })
+    override fun onDestroy() {
+        disposables.clear()
+        super.onDestroy()
     }
 
     override fun onSupportNavigateUp(): Boolean = navController.navigateUp()

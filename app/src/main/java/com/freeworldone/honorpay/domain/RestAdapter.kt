@@ -3,36 +3,37 @@ package com.freeworldone.honorpay.domain
 import com.freeworldone.honorpay.BuildConfig
 import com.freeworldone.honorpay.domain.models.body.*
 import com.freeworldone.honorpay.domain.models.response.*
+import com.freeworldone.honorpay.ui.base.extensions.subscribeIo
 import com.google.gson.Gson
-import com.ihsanbal.logging.LoggingInterceptor
+import io.reactivex.Completable
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 object RestAdapter {
     private val api: Api = Retrofit.Builder()
             .baseUrl("https://honorpay.org/api/")
-//            .addCallAdapterFactory(RxJava2CallAdapter.Factory(Schedulers.io()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(Gson())) //TODO: check gson initialization & settings
             .client(OkHttpClient.Builder().apply {
-//                addInterceptor { chain ->
-//                    val request = chain.request()
-//                    chain.proceed(request.newBuilder()
-//                            .apply {
-//                                header("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
-//                                method(request.method(), request.body())
-//                            }.build())
-//                }
-                addInterceptor(LoggingInterceptor.Builder()
-                        .loggable(BuildConfig.DEBUG)
-                        .addHeader("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
-//                        .setLevel(Level.BODY)
-//                        .log(Platform.INFO)
-                        .build())
+                addInterceptor { chain ->
+                    val request = chain.request()
+                    chain.proceed(request.newBuilder()
+                            .apply {
+                                header("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
+                                method(request.method(), request.body())
+                            }.build())
+                }
                 if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+//                addInterceptor(LoggingInterceptor.Builder()
+//                        .loggable(BuildConfig.DEBUG)
+//                        .addHeader("User-Agent", "HonorPay/${BuildConfig.VERSION_CODE} ${System.getProperty("http.agent")}")
+//                        .setLevel(Level.BASIC)
+//                        .build())
             }.build())
             .build()
             .create(Api::class.java)
@@ -40,48 +41,48 @@ object RestAdapter {
     interface Api {
 
         @POST("award")
-        fun award(@Body awardBody: AwardBody): Call<AwardResponse>
+        fun award(@Body awardBody: AwardBody): Single<AwardResponse>
 
         @POST("login")
-        fun login(@Body loginBody: LoginBody): Call<LoginResponse>
+        fun login(@Body loginBody: LoginBody): Single<LoginResponse>
 
         @GET("recent")
-        fun recent(@Query("page") page: Int): Call<RecentResponse>
+        fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
 
         @POST("register")
-        fun register(@Body registerBody: RegisterBody): Call<RegisterResponse>
+        fun register(@Body registerBody: RegisterBody): Single<RegisterResponse>
 
         @POST("registerGhost")
-        fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Call<RegisterGhostResponse>
+        fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
 
         @GET("search?q={txt}")
-        fun search(@Path("txt") txt: String): Call<SearchResponse> //: Single<SearchResponse>
+        fun search(@Path("txt") txt: String): Single<SearchResponse> //: Single<SearchResponse>
 
         @PUT("update")
-        fun update(@Body updateBody: UpdateBody): Call<Void>
+        fun update(@Body updateBody: UpdateBody): Completable
 
         @POST("uploadProfilePic")
-        fun uploadProfilePic(@Body uploadProfilePicBody: UploadProfilePicBody): Call<UploadProfilePicResponse>
+        fun uploadProfilePic(@Body uploadProfilePicBody: UploadProfilePicBody): Single<UploadProfilePicResponse>
 
         @GET("user?id={id}")
-        fun user(@Path("id") id: Int): Call<UserResponse>
+        fun user(@Path("id") id: Int): Single<UserResponse>
     }
 
-    fun award(awardBody: AwardBody): Call<AwardResponse> = api.award(awardBody)
+    fun award(awardBody: AwardBody): Single<AwardResponse> = api.award(awardBody).subscribeIo()
 
-    fun login(loginBody: LoginBody): Call<LoginResponse> = api.login(loginBody)
+    fun login(loginBody: LoginBody): Single<LoginResponse> = api.login(loginBody).subscribeIo()
 
-    fun recent(): Call<RecentResponse> = api.recent(1)
+    fun recent(): Single<List<RecentResponse>> = api.recent(1).subscribeIo()
 
-    fun register(registerBody: RegisterBody): Call<RegisterResponse> = api.register(registerBody)
+    fun register(registerBody: RegisterBody): Single<RegisterResponse> = api.register(registerBody).subscribeIo()
 
-    fun registerGhost(registerGhostBody: RegisterGhostBody): Call<RegisterGhostResponse> = api.registerGhost(registerGhostBody)
+    fun registerGhost(registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse> = api.registerGhost(registerGhostBody).subscribeIo()
 
-    fun search(txt: String): Call<SearchResponse> = api.search(txt)
+    fun search(txt: String): Single<SearchResponse> = api.search(txt).subscribeIo()
 
-    fun update(updateBody: UpdateBody): Call<Void> = api.update(updateBody)
+    fun update(updateBody: UpdateBody): Completable = api.update(updateBody).subscribeIo()
 
-    fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Call<UploadProfilePicResponse> = api.uploadProfilePic(uploadProfilePicBody)
+    fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Single<UploadProfilePicResponse> = api.uploadProfilePic(uploadProfilePicBody).subscribeIo()
 
-    fun user(id: Int): Call<UserResponse> = api.user(id)
+    fun user(id: Int): Single<UserResponse> = api.user(id).subscribeIo()
 }
