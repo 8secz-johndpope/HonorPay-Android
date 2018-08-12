@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="vm"
-            type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel"/>
+            type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel" />
     </data>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.screens.profile.ProfileFragment">
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutHonor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,32 +30,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvProfileData"
-                pager="@{(vpProfile)}">
+                app:pager="@{(vpProfile)}">
 
-                <android.support.design.widget.TabItem
+                <com.google.android.material.tabs.TabItem
                     android:id="@+id/tabAbout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tab_about"/>
+                    android:text="@string/tab_about" />
 
-                <android.support.design.widget.TabItem
+                <com.google.android.material.tabs.TabItem
                     android:id="@+id/tabHonorsReceived"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tab_honors_received"/>
+                    android:text="@string/tab_honors_received" />
 
-                <android.support.design.widget.TabItem
+                <com.google.android.material.tabs.TabItem
                     android:id="@+id/tabHonorsAwarded"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tab_honors_awarded"/>
-            </android.support.design.widget.TabLayout>
+                    android:text="@string/tab_honors_awarded" />
+            </com.google.android.material.tabs.TabLayout>
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vpProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:items="@{vm.items}"/>
+                app:items="@{vm.items}" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

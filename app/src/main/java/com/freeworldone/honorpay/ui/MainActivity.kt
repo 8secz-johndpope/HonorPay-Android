@@ -1,12 +1,11 @@
 package com.freeworldone.honorpay.ui
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
@@ -27,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.vm = viewModel
         binding.setLifecycleOwner(this)
-        binding.bottomNav.setupWithNavController(navController)
-        binding.collapsingToolbar.setupWithNavController(binding.toolbar, navController)
+//        binding.bottomNav.setupWithNavController(navController)
+//        binding.collapsingToolbar.setupWithNavController(binding.toolbar, navController)
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController)
+        setupActionBarWithNavController(this, navController)
 
         RestAdapter.recent()
                 .observeOn(AndroidSchedulers.mainThread())

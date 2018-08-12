@@ -16,7 +16,7 @@
             type="com.freeworldone.honorpay.ui.base.items.HonorItem"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cItemRecent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -118,5 +118,5 @@
             app:layout_constraintStart_toStartOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toBottomOf="@+id/ivHonoredPerson"
             tools:text="13"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

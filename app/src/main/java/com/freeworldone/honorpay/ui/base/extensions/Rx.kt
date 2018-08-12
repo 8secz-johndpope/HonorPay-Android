@@ -1,6 +1,5 @@
 package com.freeworldone.honorpay.ui.base.extensions
 
-import com.freeworldone.honorpay.data.AppDatabase
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -11,20 +10,17 @@ fun Disposable.disposeBy(disposables: CompositeDisposable): Disposable = apply {
 
 fun Completable.observeOnMain(): Completable = observeOn(AndroidSchedulers.mainThread())
 //fun Completable.computations(): Completable = observeOn(Schedulers.computation())
-fun Completable.sql(db: AppDatabase, f: AppDatabase.() -> Unit): Completable = observeOn(Schedulers.io()).doOnComplete { db.runInTransaction { db.f() } }
 
 //fun Completable.subscribeComputations(): Completable = subscribeOn(Schedulers.computation())
 fun Completable.subscribeIo(): Completable = subscribeOn(Schedulers.io())
 
 fun <T> Flowable<T>.observeOnMain(): Flowable<T> = observeOn(AndroidSchedulers.mainThread())
 //fun <T> Flowable<T>.computations(): Flowable<T> = observeOn(Schedulers.computation())
-fun <T> Flowable<T>.sql(db: AppDatabase, f: AppDatabase.(it: T) -> Unit): Flowable<T> = observeOn(Schedulers.io()).doOnNext { db.runInTransaction { db.f(it) } }
 //fun <T> Flowable<T>.subscribeComputations(): Flowable<T> = subscribeOn(Schedulers.computation())
 //fun <T> Flowable<T>.subscribeIo(): Flowable<T> = subscribeOn(Schedulers.io())
 
 fun <T> Maybe<T>.observeOnMain(): Maybe<T> = observeOn(AndroidSchedulers.mainThread())
 //fun <T> Maybe<T>.computations(): Maybe<T> = observeOn(Schedulers.computation())
-fun <T> Maybe<T>.sql(db: AppDatabase, f: AppDatabase.(it: T) -> Unit): Maybe<T> = observeOn(Schedulers.io()).doAfterSuccess { db.runInTransaction { db.f(it) } }
 //fun <T> Maybe<T>.subscribeComputations(): Maybe<T> = subscribeOn(Schedulers.computation())
 //fun <T> Maybe<T>.subscribeIo(): Maybe<T> = subscribeOn(Schedulers.io())
 
@@ -40,7 +36,6 @@ fun <T> Observable<T>.subscribeComputations(): Observable<T> = subscribeOn(Sched
 
 fun <T> Single<T>.observeOnMain(): Single<T> = observeOn(AndroidSchedulers.mainThread())
 //fun <T> Single<T>.computations(): Observable<T> = observeOn(Schedulers.computation())
-fun <T> Single<T>.sql(db: AppDatabase, f: AppDatabase.(it: T) -> Unit): Single<T> = observeOn(Schedulers.io()).doAfterSuccess { db.runInTransaction { db.f(it) } }
 
 fun <T> Single<T>.subscribeComputations(): Single<T> = subscribeOn(Schedulers.computation())
 fun <T> Single<T>.subscribeIo(): Single<T> = subscribeOn(Schedulers.io())

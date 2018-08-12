@@ -1,7 +1,7 @@
 package com.freeworldone.honorpay.ui.base.extensions
 
-import android.databinding.BindingAdapter
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("url")

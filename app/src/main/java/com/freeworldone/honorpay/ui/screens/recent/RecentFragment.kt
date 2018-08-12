@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.freeworldone.honorpay.databinding.FragmentRecentBinding
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 
 
-class RecentFragment : android.support.v4.app.Fragment(), View.OnClickListener {
+class RecentFragment : Fragment(), View.OnClickListener {
 
     private val viewModel: RecentViewModel by lazy { getViewModel<RecentViewModel>() }
     private lateinit var binding: FragmentRecentBinding

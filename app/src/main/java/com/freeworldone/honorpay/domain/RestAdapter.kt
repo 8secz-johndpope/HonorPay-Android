@@ -56,7 +56,7 @@ object RestAdapter {
         fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
 
         @GET("search?q={txt}")
-        fun search(@Path("txt") txt: String): Single<SearchResponse> //: Single<SearchResponse>
+        fun search(@Path("txt") txt: String): Single<SearchResponse>
 
         @PUT("update")
         fun update(@Body updateBody: UpdateBody): Completable

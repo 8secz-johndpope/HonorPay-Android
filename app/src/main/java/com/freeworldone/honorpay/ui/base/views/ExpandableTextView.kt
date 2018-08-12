@@ -2,9 +2,9 @@ package com.freeworldone.honorpay.ui.base.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.appcompat.widget.AppCompatTextView
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.ui.base.extensions.cycleExpansion
 import com.freeworldone.honorpay.ui.base.extensions.drawable

@@ -1,7 +1,7 @@
 package com.freeworldone.honorpay.ui.base.extensions
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 
 inline fun <reified T : ViewModel> FragmentActivity.getViewModel(): T = ViewModelProviders.of(this).get(T::class.java)

@@ -1,9 +1,9 @@
 package com.freeworldone.honorpay.ui.base.extensions
 
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 
 fun ViewGroup.children(): List<View> = mutableListOf<View>().apply {
     for (i in 0 until childCount) {

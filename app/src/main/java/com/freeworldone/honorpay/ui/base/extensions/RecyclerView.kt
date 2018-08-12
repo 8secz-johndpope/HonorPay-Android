@@ -1,7 +1,7 @@
 package com.freeworldone.honorpay.ui.base.extensions
 
-import android.databinding.BindingAdapter
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.freeworldone.honorpay.ui.base.adapters.RvAdapter
 import com.freeworldone.honorpay.ui.base.items.RvItem
 

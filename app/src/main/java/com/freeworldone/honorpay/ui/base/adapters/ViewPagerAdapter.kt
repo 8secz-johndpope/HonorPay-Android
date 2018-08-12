@@ -1,8 +1,8 @@
 package com.freeworldone.honorpay.ui.base.adapters
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.v4.view.PagerAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.viewpager.widget.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
