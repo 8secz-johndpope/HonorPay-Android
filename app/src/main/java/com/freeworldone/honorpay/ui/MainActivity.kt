@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.ui.base.extensions.disposeBy
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 import com.freeworldone.honorpay.ui.base.extensions.log
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 
@@ -28,14 +27,30 @@ class MainActivity : AppCompatActivity() {
         binding.setLifecycleOwner(this)
 //        binding.bottomNav.setupWithNavController(navController)
 //        binding.collapsingToolbar.setupWithNavController(binding.toolbar, navController)
+        NavigationUI.setupWithNavController(binding.bottomNav, navController)
+        NavigationUI.setupWithNavController(binding.collapsingToolbar, binding.toolbar, navController)
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(this, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+//        setupActionBarWithNavController(navController)
 
-        RestAdapter.recent()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { it.forEach { log("onSubscribe: $it") } },
-                        { log("onError: $it") })
+//        RestAdapter.recent()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        { recents -> log("onSubscribe: recents size: ${recents.size}") } ,
+//                        { log("onError: $it") })
+//                .disposeBy(disposables)
+
+
+        RestAdapter.login("colinrturner@gmail.com","p0o9i8u7y6t5")
+                .doAfterSuccess { log("first login response: $it") }
+                .doOnError { log("first login error: $it") }
+                .flatMap { RestAdapter.user(it.id) }
+                .doAfterSuccess { log("user response: $it") }
+                .doOnError { log("user error: $it") }
+                .flatMap { RestAdapter.login("colinrturner@gmail.com","p0u7y6t5") }
+                .doAfterSuccess { log("second login response: $it") }
+                .doOnError { log("second login error: $it") }
+                .subscribe({},{ log("error: $it")})
                 .disposeBy(disposables)
     }
 

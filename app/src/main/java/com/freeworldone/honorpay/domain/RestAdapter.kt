@@ -43,8 +43,8 @@ object RestAdapter {
         @POST("award")
         fun award(@Body awardBody: AwardBody): Single<AwardResponse>
 
-        @POST("login")
-        fun login(@Body loginBody: LoginBody): Single<LoginResponse>
+        @GET("login")
+        fun login(@Query("e") email: String, @Query("p") password: String): Single<LoginResponse>
 
         @GET("recent")
         fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
@@ -64,13 +64,13 @@ object RestAdapter {
         @POST("uploadProfilePic")
         fun uploadProfilePic(@Body uploadProfilePicBody: UploadProfilePicBody): Single<UploadProfilePicResponse>
 
-        @GET("user?id={id}")
-        fun user(@Path("id") id: Int): Single<UserResponse>
+        @GET("getuser")
+        fun user(@Query("id") id: Int): Single<UserResponse>
     }
 
     fun award(awardBody: AwardBody): Single<AwardResponse> = api.award(awardBody).subscribeIo()
 
-    fun login(loginBody: LoginBody): Single<LoginResponse> = api.login(loginBody).subscribeIo()
+    fun login(email: String, password: String): Single<LoginResponse> = api.login(email, password).subscribeIo()
 
     fun recent(): Single<List<RecentResponse>> = api.recent(1).subscribeIo()
 
