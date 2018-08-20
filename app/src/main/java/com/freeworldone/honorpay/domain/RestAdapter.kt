@@ -49,7 +49,7 @@ object RestAdapter {
         @GET("recent")
         fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
 
-        @POST("register")
+        @POST("newuser")
         fun register(@Body registerBody: RegisterBody): Single<RegisterResponse>
 
         @POST("registerGhost")
