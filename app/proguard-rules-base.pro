@@ -15,13 +15,19 @@
 -dontwarn retrofit2.Platform$Java8 # Retrofit
 -dontwarn okio.** # Okio
 -dontwarn okhttp3.** # Okhttp
--dontwarn okio.** # Okhttp
--dontwarn javax.annotation.** # Okhttp
+-dontwarn okio.** # Okhttp, Moshi
+-dontwarn javax.annotation.** # Okhttp, Moshi
 -dontwarn org.conscrypt.** # Okhttp
--keepattributes Signature # Retrofit
+-keep @com.squareup.moshi.JsonQualifier interface * # Moshi
 -keepattributes Exceptions # Retrofit
+-keepattributes Signature # Retrofit
 -keepattributes SourceFile,LineNumberTable
+-keepclasseswithmembers class * { # Moshi
+    @com.squareup.moshi.* <methods>;
+}
 -keepclassmembernames,allowobfuscation interface * { # Retrofit
     @retrofit2.http.* <methods>;
 }
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase # Okhttp
+
+

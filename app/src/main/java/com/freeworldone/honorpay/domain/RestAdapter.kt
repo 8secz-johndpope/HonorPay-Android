@@ -4,21 +4,20 @@ import com.freeworldone.honorpay.BuildConfig
 import com.freeworldone.honorpay.domain.models.body.*
 import com.freeworldone.honorpay.domain.models.response.*
 import com.freeworldone.honorpay.ui.base.extensions.subscribeIo
-import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 object RestAdapter {
     private val api: Api = Retrofit.Builder()
             .baseUrl("https://honorpay.org/api/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(Gson())) //TODO: check gson initialization & settings
+            .addConverterFactory(MoshiConverterFactory.create())
             .client(OkHttpClient.Builder().apply {
                 addInterceptor { chain ->
                     val request = chain.request()

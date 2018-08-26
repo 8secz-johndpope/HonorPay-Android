@@ -15,7 +15,6 @@ const val SAVED_USER_COUNTRY = "USER_COUNTRY"
 const val SAVED_USER_ATTR = "USER_ATTR"
 const val SAVED_USER_EMAIL = "USER_EMAIL"
 const val SAVED_USER_SIG = "USER_SIG"
-const val SAVED_USER_IMG_URL = "USER_IMG_URL"
 const val SAVED_USER_JOINED = "USER_JOINED"
 const val SAVED_USER_TYPE = "USER_TYPE"
 const val SAVED_USER_PUBLIC_FIGURE = "USER_PUBLIC_FIG"
@@ -53,44 +52,42 @@ var SharedPreferences.user: User?
         if(!contains(SAVED_USER_ID)) return null
         return User(
                 id = getInt(SAVED_USER_ID, 0),
-                first_name = getString(SAVED_USER_FIRST_NAME) ?: "",
-                last_name = getString(SAVED_USER_LAST_NAME) ?: "",
+                firstName = getString(SAVED_USER_FIRST_NAME) ?: "",
+                lastName = getString(SAVED_USER_LAST_NAME) ?: "",
                 nickname = getString(SAVED_USER_NICKNAME) ?: "",
                 region = getString(SAVED_USER_REGION) ?: "",
                 country = getString(SAVED_USER_COUNTRY) ?: "",
                 attributes = getString(SAVED_USER_ATTR) ?: "",
                 email = getString(SAVED_USER_EMAIL) ?: "",
                 signature = getString(SAVED_USER_SIG) ?: "",
-                img_url = getString(SAVED_USER_IMG_URL),
                 joined = getDate(SAVED_USER_JOINED),
                 type = getInt(SAVED_USER_TYPE, 2).let { UserType.fromInt(it) },
-                public_figure = getBoolean(SAVED_USER_PUBLIC_FIGURE, false),
-                notifications = getBoolean(SAVED_USER_NOTIFICATIONS, false),
-                reminders = getBoolean(SAVED_USER_REMINDERS, false),
-                honors_received = getInt(SAVED_USER_HONORS_RECEIVED, 0),
-                honors_awards = getInt(SAVED_USER_HONORS_AWARDED, 0),
-                last_active = getDate(SAVED_USER_LAST_ACTIVE),
-                last_honoree = getInt(SAVED_USER_LAST_HONOREE, 0))
+                isPublicFigure = getBoolean(SAVED_USER_PUBLIC_FIGURE, false),
+                isEmailNotificationsAllowed = getBoolean(SAVED_USER_NOTIFICATIONS, false),
+                isWeeklyEmailRemindersAllowed = getBoolean(SAVED_USER_REMINDERS, false),
+                honorsReceived = getInt(SAVED_USER_HONORS_RECEIVED, 0),
+                honorsAwarded = getInt(SAVED_USER_HONORS_AWARDED, 0),
+                lastActive = getDate(SAVED_USER_LAST_ACTIVE),
+                lastHonoree = getInt(SAVED_USER_LAST_HONOREE, 0))
     }
     set(user) {
         save(
                 SAVED_USER_ID to user?.id,
-                SAVED_USER_FIRST_NAME to user?.first_name,
-                SAVED_USER_LAST_NAME to user?.last_name,
+                SAVED_USER_FIRST_NAME to user?.firstName,
+                SAVED_USER_LAST_NAME to user?.lastName,
                 SAVED_USER_NICKNAME to user?.nickname,
                 SAVED_USER_REGION to user?.region,
                 SAVED_USER_COUNTRY to user?.country,
                 SAVED_USER_ATTR to user?.attributes,
                 SAVED_USER_EMAIL to user?.email,
                 SAVED_USER_SIG to user?.signature,
-                SAVED_USER_IMG_URL to user?.img_url,
                 SAVED_USER_JOINED to user?.joined,
                 SAVED_USER_TYPE to user?.type?.type,
-                SAVED_USER_PUBLIC_FIGURE to user?.public_figure,
-                SAVED_USER_NOTIFICATIONS to user?.notifications,
-                SAVED_USER_REMINDERS to user?.reminders,
-                SAVED_USER_HONORS_RECEIVED to user?.honors_received,
-                SAVED_USER_HONORS_AWARDED to user?.honors_awards,
-                SAVED_USER_LAST_ACTIVE to user?.last_active,
-                SAVED_USER_LAST_HONOREE to user?.last_honoree)
+                SAVED_USER_PUBLIC_FIGURE to user?.isPublicFigure,
+                SAVED_USER_NOTIFICATIONS to user?.isEmailNotificationsAllowed,
+                SAVED_USER_REMINDERS to user?.isWeeklyEmailRemindersAllowed,
+                SAVED_USER_HONORS_RECEIVED to user?.honorsReceived,
+                SAVED_USER_HONORS_AWARDED to user?.honorsAwarded,
+                SAVED_USER_LAST_ACTIVE to user?.lastActive,
+                SAVED_USER_LAST_HONOREE to user?.lastHonoree)
     }
