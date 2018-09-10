@@ -13,9 +13,7 @@ import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 
 class ProfileFragment : Fragment() {
 
-    private val viewModel: ProfileViewModel by lazy {
-        getViewModel { ProfileViewModel(ProfileFragmentArgs.fromBundle(arguments).user) }
-    }
+    private val viewModel: ProfileViewModel by lazy { getViewModel { ProfileViewModel(ProfileFragmentArgs.fromBundle(arguments).user) } }
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =

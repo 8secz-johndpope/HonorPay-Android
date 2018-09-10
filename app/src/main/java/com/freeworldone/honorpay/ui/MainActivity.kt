@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.vm = viewModel
         binding.setLifecycleOwner(this)
-//        binding.bottomNav.setupWithNavController(navController)
-//        binding.collapsingToolbar.setupWithNavController(binding.toolbar, navController)
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
         NavigationUI.setupWithNavController(binding.collapsingToolbar, binding.toolbar, navController)
         setSupportActionBar(binding.toolbar)

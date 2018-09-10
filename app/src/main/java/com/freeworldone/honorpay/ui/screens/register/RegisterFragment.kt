@@ -21,4 +21,3 @@ class RegisterFragment : Fragment() {
                 binding.setLifecycleOwner(this)
             }.root
 }
-
