@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
+import com.freeworldone.honorpay.domain.models.body.RegisterBody
 import com.freeworldone.honorpay.ui.base.extensions.disposeBy
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 import com.freeworldone.honorpay.ui.base.extensions.log
@@ -38,18 +39,53 @@ class MainActivity : AppCompatActivity() {
 //                        { log("onError: $it") })
 //                .disposeBy(disposables)
 
-
-        RestAdapter.login("colinrturner@gmail.com","p0o9i8u7y6t5")
+        RestAdapter.register(RegisterBody(
+                first_name = "FirstName",
+                last_name = "LastName",
+                nickname = "Nickname",
+                region = "Region",
+                country = "Country",
+                attributes = "Attributes",
+                email = "jim+test003@ohno.run",
+                password = "honorPay01",
+                signature = "Signature",
+                type = 1,
+                notifications = 0,
+                reminders = 0))
+                .doOnError { log("error: $it") }
+                .toSingle{}
+                .flatMap { RestAdapter.login("jim+test003@ohno.run", "honorPay01") }
                 .doAfterSuccess { log("first login response: $it") }
                 .doOnError { log("first login error: $it") }
                 .flatMap { RestAdapter.user(it.id) }
                 .doAfterSuccess { log("user response: $it") }
                 .doOnError { log("user error: $it") }
-                .flatMap { RestAdapter.login("colinrturner@gmail.com","p0u7y6t5") }
-                .doAfterSuccess { log("second login response: $it") }
-                .doOnError { log("second login error: $it") }
-                .subscribe({},{ log("error: $it")})
+                .subscribe({ }, { log("error: $it") })
                 .disposeBy(disposables)
+
+//        RestAdapter.login("jim+test001@ohno.run", "honorPay01")
+//                .doAfterSuccess { log("first login response: $it") }
+//                .doOnError { log("first login error: $it") }
+//                .flatMap { RestAdapter.user(it.id) }
+//                .doAfterSuccess { log("user response: $it") }
+//                .doOnError { log("user error: $it") }
+//                .flatMap { RestAdapter.login("jim+test001@ohno.run", "p0u7y6t5") }
+//                .doAfterSuccess { log("second login response: $it") }
+//                .doOnError { log("second login error: $it") }
+//                .subscribe({}, { log("error: $it") })
+//                .disposeBy(disposables)
+
+//        RestAdapter.login("colinrturner@gmail.com", "p0o9i8u7y6t5")
+//                .doAfterSuccess { log("first login response: $it") }
+//                .doOnError { log("first login error: $it") }
+//                .flatMap { RestAdapter.user(it.id) }
+//                .doAfterSuccess { log("user response: $it") }
+//                .doOnError { log("user error: $it") }
+//                .flatMap { RestAdapter.login("colinrturner@gmail.com", "p0u7y6t5") }
+//                .doAfterSuccess { log("second login response: $it") }
+//                .doOnError { log("second login error: $it") }
+//                .subscribe({}, { log("error: $it") })
+//                .disposeBy(disposables)
     }
 
     override fun onDestroy() {

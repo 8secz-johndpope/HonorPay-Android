@@ -1,6 +1,6 @@
 package com.freeworldone.honorpay.domain.models.body
 
-class UpdateBody(
+data class UpdateBody(
         val auth_token: String,
         val first_name: String? = null,
         val last_name: String? = null,

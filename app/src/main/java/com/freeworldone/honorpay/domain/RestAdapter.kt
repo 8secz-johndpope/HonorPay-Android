@@ -3,7 +3,9 @@ package com.freeworldone.honorpay.domain
 import com.freeworldone.honorpay.BuildConfig
 import com.freeworldone.honorpay.domain.models.body.*
 import com.freeworldone.honorpay.domain.models.response.*
+import com.freeworldone.honorpay.domain.typeadapters.DateAdapter
 import com.freeworldone.honorpay.ui.base.extensions.subscribeIo
+import com.squareup.moshi.Moshi
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.OkHttpClient
@@ -17,7 +19,7 @@ object RestAdapter {
     private val api: Api = Retrofit.Builder()
             .baseUrl("https://honorpay.org/api/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(DateAdapter()).build()))
             .client(OkHttpClient.Builder().apply {
                 addInterceptor { chain ->
                     val request = chain.request()
@@ -49,7 +51,7 @@ object RestAdapter {
         fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
 
         @POST("newuser")
-        fun register(@Body registerBody: RegisterBody): Single<RegisterResponse>
+        fun register(@Body registerBody: RegisterBody): Completable
 
         @POST("registerGhost")
         fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
@@ -73,7 +75,7 @@ object RestAdapter {
 
     fun recent(): Single<List<RecentResponse>> = api.recent(1).subscribeIo()
 
-    fun register(registerBody: RegisterBody): Single<RegisterResponse> = api.register(registerBody).subscribeIo()
+    fun register(registerBody: RegisterBody): Completable = api.register(registerBody).subscribeIo()
 
     fun registerGhost(registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse> = api.registerGhost(registerGhostBody).subscribeIo()
 

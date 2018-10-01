@@ -1,7 +1,7 @@
 package com.freeworldone.honorpay.domain.models.body
 
-class RegisterBody(
-        val auth_token: String,
+data class RegisterBody(
+        val auth_token: String? = null,
         val first_name: String? = null,
         val last_name: String? = null,
         val nickname: String? = null,

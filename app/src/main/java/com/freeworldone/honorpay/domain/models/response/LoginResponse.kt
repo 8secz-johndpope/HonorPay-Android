@@ -1,7 +1,7 @@
 package com.freeworldone.honorpay.domain.models.response
 
 //TODO
-class LoginResponse(
+data class LoginResponse(
         val location: String? = null,
         val loginToken: String? = null,
         val type: Int = 0,

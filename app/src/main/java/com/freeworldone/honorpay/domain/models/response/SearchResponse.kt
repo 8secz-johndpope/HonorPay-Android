@@ -2,7 +2,7 @@ package com.freeworldone.honorpay.domain.models.response
 
 import java.util.*
 
-class SearchResponse(
+data class SearchResponse(
         val id: Int? = null,
         val first_name: String? = null,
         val last_name: String? = null,

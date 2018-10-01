@@ -2,7 +2,7 @@ package com.freeworldone.honorpay.domain.models.response
 
 import java.util.*
 
-class RegisterResponse(
+data class RegisterResponse(
         val auth_token: String? = null,
         val id: Int? = null,
         val next_honor: Date? = null,
