@@ -1,7 +1,11 @@
 package com.freeworldone.honorpay.domain
 
 import com.freeworldone.honorpay.BuildConfig
-import com.freeworldone.honorpay.domain.models.body.*
+import com.freeworldone.honorpay.data.enums.UserType
+import com.freeworldone.honorpay.domain.models.body.AwardBody
+import com.freeworldone.honorpay.domain.models.body.RegisterGhostBody
+import com.freeworldone.honorpay.domain.models.body.UpdateBody
+import com.freeworldone.honorpay.domain.models.body.UploadProfilePicBody
 import com.freeworldone.honorpay.domain.models.response.*
 import com.freeworldone.honorpay.domain.typeadapters.DateAdapter
 import com.freeworldone.honorpay.ui.base.extensions.subscribeIo
@@ -44,20 +48,31 @@ object RestAdapter {
         @POST("award")
         fun award(@Body awardBody: AwardBody): Single<AwardResponse>
 
-        @GET("login")
+        @POST("login")
         fun login(@Query("e") email: String, @Query("p") password: String): Single<LoginResponse>
 
         @GET("recent")
         fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
 
         @POST("newuser")
-        fun register(@Body registerBody: RegisterBody): Completable
+        fun newUser(@Query("first_name") firstName: String,
+                    @Query("last_name") lastName: String,
+                    @Query("nickname") nickname: String?,
+                    @Query("region") region: String,
+                    @Query("country") country: String,
+                    @Query("attributes") attributes: String,
+                    @Query("email") email: String,
+                    @Query("password") password: String,
+                    @Query("signature") signature: String?,
+                    @Query("type") userType: Int,
+                    @Query("notifications") notificationsAllowed: Int,
+                    @Query("reminders") remindersAllowed: Int): Completable
 
         @POST("registerGhost")
         fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
 
-        @GET("search?q={txt}")
-        fun search(@Path("txt") txt: String): Single<SearchResponse>
+        @GET("search")
+        fun search(@Query("q") txt: String): Single<SearchResponse>
 
         @PUT("update")
         fun update(@Body updateBody: UpdateBody): Completable
@@ -75,7 +90,31 @@ object RestAdapter {
 
     fun recent(): Single<List<RecentResponse>> = api.recent(1).subscribeIo()
 
-    fun register(registerBody: RegisterBody): Completable = api.register(registerBody).subscribeIo()
+    fun newUser(firstName: String,
+                lastName: String,
+                nickname: String? = null,
+                region: String,
+                country: String,
+                attributes: String,
+                email: String,
+                password: String,
+                signature: String? = null,
+                userType: UserType = UserType.UNCONFIRMED,
+                notificationsAllowed: Boolean,
+                remindersAllowed: Boolean): Completable = api.newUser(
+            firstName = firstName,
+            lastName = lastName,
+            nickname = nickname,
+            region = region,
+            country = country,
+            attributes = attributes,
+            email = email,
+            password = password,
+            signature = signature,
+            userType = userType.type,
+            notificationsAllowed = if (notificationsAllowed) 1 else 0,
+            remindersAllowed = if (remindersAllowed) 1 else 0)
+            .subscribeIo()
 
     fun registerGhost(registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse> = api.registerGhost(registerGhostBody).subscribeIo()
 

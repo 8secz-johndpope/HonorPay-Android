@@ -9,11 +9,11 @@ import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
 import com.freeworldone.honorpay.domain.RestAdapter
-import com.freeworldone.honorpay.domain.models.body.RegisterBody
 import com.freeworldone.honorpay.ui.base.extensions.disposeBy
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 import com.freeworldone.honorpay.ui.base.extensions.log
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,22 +39,22 @@ class MainActivity : AppCompatActivity() {
 //                        { log("onError: $it") })
 //                .disposeBy(disposables)
 
-        RestAdapter.register(RegisterBody(
-                first_name = "FirstName",
-                last_name = "LastName",
+        RestAdapter.newUser(
+                firstName = "FirstName",
+                lastName = "LastName",
                 nickname = "Nickname",
                 region = "Region",
                 country = "Country",
                 attributes = "Attributes",
-                email = "jim+test003@ohno.run",
-                password = "honorPay01",
+                email = "jim+test007@ohno.run",
+                password = "honorPay01x",
                 signature = "Signature",
-                type = 1,
-                notifications = 0,
-                reminders = 0))
+                notificationsAllowed = false,
+                remindersAllowed = false)
                 .doOnError { log("error: $it") }
                 .toSingle{}
-                .flatMap { RestAdapter.login("jim+test003@ohno.run", "honorPay01") }
+                .delay(1, TimeUnit.SECONDS)
+                .flatMap { RestAdapter.login("jim+test007@ohno.run", "honorPay01x") }
                 .doAfterSuccess { log("first login response: $it") }
                 .doOnError { log("first login error: $it") }
                 .flatMap { RestAdapter.user(it.id) }
