@@ -31,61 +31,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         NavigationUI.setupActionBarWithNavController(this, navController)
 //        setupActionBarWithNavController(navController)
-
-//        RestAdapter.recent()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        { recents -> log("onSubscribe: recents size: ${recents.size}") } ,
-//                        { log("onError: $it") })
-//                .disposeBy(disposables)
-
-        RestAdapter.newUser(
-                firstName = "FirstName",
-                lastName = "LastName",
-                nickname = "Nickname",
-                region = "Region",
-                country = "Country",
-                attributes = "Attributes",
-                email = "jim+test007@ohno.run",
-                password = "honorPay01x",
-                signature = "Signature",
-                notificationsAllowed = false,
-                remindersAllowed = false)
-                .doOnError { log("error: $it") }
-                .toSingle{}
-                .delay(1, TimeUnit.SECONDS)
-                .flatMap { RestAdapter.login("jim+test007@ohno.run", "honorPay01x") }
-                .doAfterSuccess { log("first login response: $it") }
-                .doOnError { log("first login error: $it") }
-                .flatMap { RestAdapter.user(it.id) }
-                .doAfterSuccess { log("user response: $it") }
-                .doOnError { log("user error: $it") }
-                .subscribe({ }, { log("error: $it") })
-                .disposeBy(disposables)
-
-//        RestAdapter.login("jim+test001@ohno.run", "honorPay01")
-//                .doAfterSuccess { log("first login response: $it") }
-//                .doOnError { log("first login error: $it") }
-//                .flatMap { RestAdapter.user(it.id) }
-//                .doAfterSuccess { log("user response: $it") }
-//                .doOnError { log("user error: $it") }
-//                .flatMap { RestAdapter.login("jim+test001@ohno.run", "p0u7y6t5") }
-//                .doAfterSuccess { log("second login response: $it") }
-//                .doOnError { log("second login error: $it") }
-//                .subscribe({}, { log("error: $it") })
-//                .disposeBy(disposables)
-
-//        RestAdapter.login("colinrturner@gmail.com", "p0o9i8u7y6t5")
-//                .doAfterSuccess { log("first login response: $it") }
-//                .doOnError { log("first login error: $it") }
-//                .flatMap { RestAdapter.user(it.id) }
-//                .doAfterSuccess { log("user response: $it") }
-//                .doOnError { log("user error: $it") }
-//                .flatMap { RestAdapter.login("colinrturner@gmail.com", "p0u7y6t5") }
-//                .doAfterSuccess { log("second login response: $it") }
-//                .doOnError { log("second login error: $it") }
-//                .subscribe({}, { log("error: $it") })
-//                .disposeBy(disposables)
     }
 
     override fun onDestroy() {

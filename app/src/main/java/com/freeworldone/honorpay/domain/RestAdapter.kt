@@ -48,13 +48,13 @@ object RestAdapter {
         @POST("award")
         fun award(@Body awardBody: AwardBody): Single<AwardResponse>
 
-        @POST("login")
+        @GET("login")
         fun login(@Query("e") email: String, @Query("p") password: String): Single<LoginResponse>
 
         @GET("recent")
         fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
 
-        @POST("newuser")
+        @GET("newuser")
         fun newUser(@Query("first_name") firstName: String,
                     @Query("last_name") lastName: String,
                     @Query("nickname") nickname: String?,
@@ -66,7 +66,7 @@ object RestAdapter {
                     @Query("signature") signature: String?,
                     @Query("type") userType: Int,
                     @Query("notifications") notificationsAllowed: Int,
-                    @Query("reminders") remindersAllowed: Int): Completable
+                    @Query("reminders") remindersAllowed: Int): Single<NewUserResponse>
 
         @POST("registerGhost")
         fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
@@ -101,7 +101,7 @@ object RestAdapter {
                 signature: String? = null,
                 userType: UserType = UserType.UNCONFIRMED,
                 notificationsAllowed: Boolean,
-                remindersAllowed: Boolean): Completable = api.newUser(
+                remindersAllowed: Boolean): Single<NewUserResponse> = api.newUser(
             firstName = firstName,
             lastName = lastName,
             nickname = nickname,

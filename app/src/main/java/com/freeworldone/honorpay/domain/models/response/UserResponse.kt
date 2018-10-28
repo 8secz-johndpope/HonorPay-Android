@@ -20,6 +20,6 @@ data class UserResponse(
         val honors_received: Int? = null,
         val total_weight: Int? = null,
         val honors_awards: Int? = null,
-        val ghost_creator: Int? = null,    //id of creator in the case of ghost account
-        val last_active: Date? = null,
+        val ghost_creator: String? = null,    //id of creator in the case of ghost account
+//        val last_active: Date? = null,
         val last_honoree: Int? = null)     //foreign key, to prevent sequential honoring
