@@ -33,24 +33,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:background="@color/white"
+                tools:background="@null"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/black_t38"
+                android:background="?scrimBackground"
                 android:gravity="center_horizontal"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/add_profile_pic"
-                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="?android:textColorPrimaryInverse"
                 app:layout_constraintBottom_toBottomOf="@+id/ibProfilePic"
                 app:layout_constraintEnd_toEndOf="@+id/ibProfilePic"
                 app:layout_constraintStart_toStartOf="@+id/ibProfilePic" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputFirstName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,6 +65,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
@@ -71,6 +74,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLastName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -83,6 +87,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
@@ -91,6 +96,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputNickname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -103,6 +109,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNickname"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text|textCapSentences"
@@ -111,6 +118,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -123,6 +131,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -131,6 +140,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputKnownFor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -143,6 +153,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etKnownFor"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences" />
@@ -150,6 +161,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputRegion"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -162,6 +174,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRegion"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
@@ -183,6 +196,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputSignature"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -195,6 +209,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignature"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text|textCapSentences" />
@@ -202,6 +217,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -215,6 +231,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -297,7 +314,7 @@
 
             <Button
                 android:id="@+id/bCreateProfile"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

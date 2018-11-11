@@ -8,12 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
-import com.freeworldone.honorpay.domain.RestAdapter
-import com.freeworldone.honorpay.ui.base.extensions.disposeBy
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
-import com.freeworldone.honorpay.ui.base.extensions.log
 import io.reactivex.disposables.CompositeDisposable
-import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {

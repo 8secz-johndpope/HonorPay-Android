@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="vm"
-            type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel"/>
+            type="com.freeworldone.honorpay.ui.screens.profile.ProfileViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -27,10 +27,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@{vm.user.region}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@tools:sample/cities"/>
+                tools:text="@tools:sample/cities" />
 
             <TextView
                 android:id="@+id/tvKnownFor"
@@ -39,35 +40,37 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@{vm.user.attributes}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLocation"
-                tools:text="Swordfighting, Cosplay"/>
+                tools:text="Swordfighting, Cosplay" />
 
             <TextView
                 android:id="@+id/tvProfileData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bHonor"
-                tools:text="JOINED: 10 months ago\nHONORS: 0\nLAST 12 MONTHS: 0\nAWARDED: 1\nLAST ACTIVE: 10 months ago\nACCOUNT: Confirmed profile"/>
+                tools:text="JOINED: 10 months ago\nHONORS: 0\nLAST 12 MONTHS: 0\nAWARDED: 1\nLAST ACTIVE: 10 months ago\nACCOUNT: Confirmed profile" />
 
             <Button
                 android:id="@+id/bHonor"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvKnownFor"
-                tools:text="Honor Anna Mckenzie"/>
+                tools:text="Honor Anna Mckenzie" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

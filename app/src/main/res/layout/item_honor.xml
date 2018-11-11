@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="handler"
-            type="com.freeworldone.honorpay.ui.base.util.HonorHandler"/>
+            type="com.freeworldone.honorpay.ui.base.util.HonorHandler" />
 
         <variable
             name="honorItem"
-            type="com.freeworldone.honorpay.ui.base.items.HonorItem"/>
+            type="com.freeworldone.honorpay.ui.base.items.HonorItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,13 +31,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:url="@{honorItem.imageUrl}"
-            tools:srcCompat="@tools:sample/avatars"/>
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tvHonoredName"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_width="0dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
             android:drawableStart="@{honorItem.received ? @drawable/ic_menu_left_24dp : @drawable/ic_menu_right_24dp}"
@@ -49,7 +49,7 @@
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toTopOf="parent"
             tools:drawableStart="@drawable/ic_menu_left_24dp"
-            tools:text="@tools:sample/full_names"/>
+            tools:text="@tools:sample/full_names" />
 
         <TextView
             android:id="@+id/tvHonoredBy"
@@ -65,47 +65,46 @@
             app:layout_constraintEnd_toEndOf="@+id/tvHonoredName"
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toBottomOf="@+id/tvHonoredName"
-            tools:text="@tools:sample/full_names"/>
+            tools:text="@tools:sample/full_names" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
+            android:layout_height="5.5dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/black_t87"
+            android:background="?dividerVertical"
             android:visibility="@{honorItem.message.isEmpty ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
-            app:layout_constraintTop_toBottomOf="@+id/tvHonoredBy"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvHonoredBy" />
 
         <com.freeworldone.honorpay.ui.base.views.ExpandableTextView
             android:id="@+id/tvMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:text="@{honorItem.message}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             tools:drawableBottom="@drawable/ic_expand_more_24dp"
-            tools:drawableTint="@color/black_t54"
             tools:maxLines="4"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/tvTimeAgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{honorItem.timeAgo}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3hrs ago"/>
+            tools:text="3hrs ago" />
 
         <TextView
             android:id="@+id/tvHonorTotal"
@@ -117,6 +116,6 @@
             app:layout_constraintEnd_toEndOf="@+id/ivHonoredPerson"
             app:layout_constraintStart_toStartOf="@+id/ivHonoredPerson"
             app:layout_constraintTop_toBottomOf="@+id/ivHonoredPerson"
-            tools:text="13"/>
+            tools:text="13" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

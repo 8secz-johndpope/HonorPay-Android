@@ -2,17 +2,17 @@
 <resources>
     <color name="primary">#2F2B20</color>
     <color name="primaryDark">#070000</color>
-    <color name="primaryLight">#585447</color>
+    <!--<color name="primaryLight">#585447</color>-->
     <color name="accent">#0099ee</color>
-    <color name="accentDark">#0068BF</color>
-    <color name="accentLight">#6EC5FF</color>
+    <!--<color name="accentDark">#0068BF</color>-->
+    <!--<color name="accentLight">#6EC5FF</color>-->
     <color name="background">#ECD69E</color>
-    <color name="black">#000000</color>
-    <color name="black_t87">#DE000000</color>
-    <color name="black_t54">#8A000000</color>
-    <color name="black_t38">#61000000</color>
-    <color name="black_t19">#30000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="white_t60">#99FFFFFF</color>
-    <color name="white_t38">#61FFFFFF</color>
+    <!--<color name="black">#000000</color>-->
+    <!--<color name="black_t87">#DE000000</color>-->
+    <!--<color name="black_t54">#8A000000</color>-->
+    <!--<color name="black_t38">#61000000</color>-->
+    <!--<color name="black_t19">#30000000</color>-->
+    <!--<color name="white">#FFFFFF</color>-->
+    <!--<color name="white_t60">#99FFFFFF</color>-->
+    <!--<color name="white_t38">#61FFFFFF</color>-->
 </resources>
