@@ -8,14 +8,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
+import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
-import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by lazy { getViewModel<MainViewModel>() }
     private val navController: NavController by lazy { findNavController(R.id.navHostFragment) }
-    private val disposables = CompositeDisposable()
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         NavigationUI.setupActionBarWithNavController(this, navController)
 //        setupActionBarWithNavController(navController)
+
+        job = GlobalScope.launch(Dispatchers.IO) {
+            val loginResponse = RestAdapter.login("","")
+            withContext(Dispatchers.Main){
+                loginResponse
+            }
+        }
     }
 
     override fun onDestroy() {
-        disposables.clear()
+        job?.cancel()
         super.onDestroy()
     }
 

@@ -2,27 +2,27 @@ package com.freeworldone.honorpay.domain
 
 import com.freeworldone.honorpay.BuildConfig
 import com.freeworldone.honorpay.data.enums.UserType
+import com.freeworldone.honorpay.domain.models.Result
 import com.freeworldone.honorpay.domain.models.body.AwardBody
 import com.freeworldone.honorpay.domain.models.body.RegisterGhostBody
 import com.freeworldone.honorpay.domain.models.body.UpdateBody
 import com.freeworldone.honorpay.domain.models.body.UploadProfilePicBody
 import com.freeworldone.honorpay.domain.models.response.*
+import com.freeworldone.honorpay.domain.models.runCatching
 import com.freeworldone.honorpay.domain.typeadapters.DateAdapter
-import com.freeworldone.honorpay.ui.base.extensions.subscribeIo
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
-import io.reactivex.Completable
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 object RestAdapter {
     private val api: Api = Retrofit.Builder()
             .baseUrl("https://honorpay.org/api/")
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(DateAdapter()).build()))
             .client(OkHttpClient.Builder().apply {
                 addInterceptor { chain ->
@@ -46,13 +46,13 @@ object RestAdapter {
     interface Api {
 
         @POST("award")
-        fun award(@Body awardBody: AwardBody): Single<AwardResponse>
+        fun award(@Body awardBody: AwardBody): Deferred<AwardResponse>
 
         @GET("login")
-        fun login(@Query("e") email: String, @Query("p") password: String): Single<LoginResponse>
+        fun login(@Query("e") email: String, @Query("p") password: String): Deferred<LoginResponse>
 
         @GET("recent")
-        fun recent(@Query("page") page: Int): Single<List<RecentResponse>>
+        fun recent(@Query("page") page: Int): Deferred<List<RecentResponse>>
 
         @GET("newuser")
         fun newUser(@Query("first_name") firstName: String,
@@ -66,63 +66,64 @@ object RestAdapter {
                     @Query("signature") signature: String?,
                     @Query("type") userType: Int,
                     @Query("notifications") notificationsAllowed: Int,
-                    @Query("reminders") remindersAllowed: Int): Single<NewUserResponse>
+                    @Query("reminders") remindersAllowed: Int): Deferred<NewUserResponse>
 
         @POST("registerGhost")
-        fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse>
+        fun registerGhost(@Body registerGhostBody: RegisterGhostBody): Deferred<RegisterGhostResponse>
 
         @GET("search")
-        fun search(@Query("q") txt: String): Single<SearchResponse>
+        fun search(@Query("q") txt: String): Deferred<SearchResponse>
 
         @PUT("update")
-        fun update(@Body updateBody: UpdateBody): Completable
+        fun update(@Body updateBody: UpdateBody): Deferred<Nothing>
 
         @POST("uploadProfilePic")
-        fun uploadProfilePic(@Body uploadProfilePicBody: UploadProfilePicBody): Single<UploadProfilePicResponse>
+        fun uploadProfilePic(@Body uploadProfilePicBody: UploadProfilePicBody): Deferred<UploadProfilePicResponse>
 
         @GET("getuser")
-        fun user(@Query("id") id: Int): Single<UserResponse>
+        fun user(@Query("id") id: Int): Deferred<UserResponse>
     }
 
-    fun award(awardBody: AwardBody): Single<AwardResponse> = api.award(awardBody).subscribeIo()
+    suspend fun award(awardBody: AwardBody): Result<AwardResponse> = runCatching { api.award(awardBody).await() }
 
-    fun login(email: String, password: String): Single<LoginResponse> = api.login(email, password).subscribeIo()
+    suspend fun login(email: String, password: String): Result<LoginResponse> = runCatching { api.login(email, password).await() }
 
-    fun recent(): Single<List<RecentResponse>> = api.recent(1).subscribeIo()
+    suspend fun recent(): Result<List<RecentResponse>> = runCatching { api.recent(1).await() }
 
-    fun newUser(firstName: String,
-                lastName: String,
-                nickname: String? = null,
-                region: String,
-                country: String,
-                attributes: String,
-                email: String,
-                password: String,
-                signature: String? = null,
-                userType: UserType = UserType.UNCONFIRMED,
-                notificationsAllowed: Boolean,
-                remindersAllowed: Boolean): Single<NewUserResponse> = api.newUser(
-            firstName = firstName,
-            lastName = lastName,
-            nickname = nickname,
-            region = region,
-            country = country,
-            attributes = attributes,
-            email = email,
-            password = password,
-            signature = signature,
-            userType = userType.type,
-            notificationsAllowed = if (notificationsAllowed) 1 else 0,
-            remindersAllowed = if (remindersAllowed) 1 else 0)
-            .subscribeIo()
+    suspend fun newUser(firstName: String,
+                        lastName: String,
+                        nickname: String? = null,
+                        region: String,
+                        country: String,
+                        attributes: String,
+                        email: String,
+                        password: String,
+                        signature: String? = null,
+                        userType: UserType = UserType.UNCONFIRMED,
+                        notificationsAllowed: Boolean,
+                        remindersAllowed: Boolean): Result<NewUserResponse> = runCatching {
+        api.newUser(
+                firstName = firstName,
+                lastName = lastName,
+                nickname = nickname,
+                region = region,
+                country = country,
+                attributes = attributes,
+                email = email,
+                password = password,
+                signature = signature,
+                userType = userType.type,
+                notificationsAllowed = if (notificationsAllowed) 1 else 0,
+                remindersAllowed = if (remindersAllowed) 1 else 0).await()
+    }
 
-    fun registerGhost(registerGhostBody: RegisterGhostBody): Single<RegisterGhostResponse> = api.registerGhost(registerGhostBody).subscribeIo()
+    suspend fun registerGhost(registerGhostBody: RegisterGhostBody): Result<RegisterGhostResponse> = runCatching { api.registerGhost(registerGhostBody).await() }
 
-    fun search(txt: String): Single<SearchResponse> = api.search(txt).subscribeIo()
+    suspend fun search(txt: String): Result<SearchResponse> = runCatching { api.search(txt).await() }
 
-    fun update(updateBody: UpdateBody): Completable = api.update(updateBody).subscribeIo()
+    suspend fun update(updateBody: UpdateBody): Result<Nothing> = runCatching { api.update(updateBody).await() }
 
-    fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Single<UploadProfilePicResponse> = api.uploadProfilePic(uploadProfilePicBody).subscribeIo()
+    suspend fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Result<UploadProfilePicResponse> = runCatching { api.uploadProfilePic(uploadProfilePicBody).await() }
 
-    fun user(id: Int): Single<UserResponse> = api.user(id).subscribeIo()
+    suspend fun user(id: Int): Result<UserResponse> = runCatching { api.user(id).await() }
 }
