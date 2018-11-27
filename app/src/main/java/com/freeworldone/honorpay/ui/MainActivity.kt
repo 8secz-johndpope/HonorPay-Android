@@ -8,9 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
-import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,12 +28,53 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 //        setupActionBarWithNavController(navController)
 
-        job = GlobalScope.launch(Dispatchers.IO) {
-            val loginResponse = RestAdapter.login("","")
-            withContext(Dispatchers.Main){
-                loginResponse
-            }
-        }
+
+//        FirebaseAuth.getInstance().currentUser?.also {
+//            it.email
+//            it.isAnonymous
+//        }
+//
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("").requestEmail().build()
+//
+//        GoogleSignIn.getLastSignedInAccount(this)
+
+//        val providers = listOf(
+//                AuthUI.IdpConfig.EmailBuilder().build(),
+//                AuthUI.IdpConfig.PhoneBuilder().build(),
+//                AuthUI.IdpConfig.GoogleBuilder().build())
+//
+//        startActivityForResult(AuthUI.getInstance()
+//                .createSignInIntentBuilder()
+//                .setAvailableProviders(providers)
+//                .build(), RC_SIGN_IN)
+
+//        job = GlobalScope.launch(Dispatchers.IO) {
+//            val newUser = RestAdapter.newUser(
+//                    firstName = "FirstName",
+//                    lastName = "LastName",
+//                    nickname = "Nickname",
+//                    region = "Region",
+//                    country = "Country",
+//                    attributes = "Attributes",
+//                    email = "jim+test0001@ohno.run",
+//                    password = "testPw123",
+//                    signature = "Signature",
+//                    userType = UserType.UNCONFIRMED,
+//                    notificationsAllowed = true,
+//                    remindersAllowed = true)
+//
+//            val user = RestAdapter.user(1)
+//
+//
+//            val loginResponse = RestAdapter.login("jim+test0001@ohno.run", "testPw123")
+//
+//
+//            withContext(Dispatchers.Main) {
+//                log("$newUser")
+//                log("$user")
+//                log("$loginResponse")
+//            }
+//        }
     }
 
     override fun onDestroy() {
@@ -43,4 +83,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == RC_SIGN_IN) {
+//            val response = IdpResponse.fromResultIntent(data)
+//            if (resultCode == Activity.RESULT_OK) {
+//                // Successfully signed in
+//                val user = FirebaseAuth.getInstance().currentUser
+//                log("user: email: ${user?.email}, photoUrl: ${user?.photoUrl}, phoneNumber: ${user?.phoneNumber}, displayName: ${user?.displayName}, uid: ${user?.uid}, isEmailVerified: ${user?.isEmailVerified}")
+//            } else {
+//                log("sign in failed, user: ${FirebaseAuth.getInstance().currentUser}, error: ${response?.error}")
+//            }
+//        }
+//    }
+//
+//    companion object {
+//        private const val RC_SIGN_IN = 123
+//    }
 }
