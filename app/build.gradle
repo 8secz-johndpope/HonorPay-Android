@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
+//            applicationIdSuffix ".debug"
             resValue "string", "app_name", "DevHonorPay"
             debuggable true
             minifyEnabled false
@@ -68,9 +68,11 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07'
     implementation 'android.arch.navigation:navigation-runtime-ktx:1.0.0-alpha07'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-identity:16.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.squareup.moshi:moshi:1.6.0'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
@@ -86,3 +88,5 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:2.0.0'
     testImplementation 'junit:junit:4.12'
 }
+
+apply plugin: 'com.google.gms.google-services'
