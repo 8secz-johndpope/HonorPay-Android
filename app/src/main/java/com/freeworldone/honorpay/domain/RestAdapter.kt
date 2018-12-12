@@ -8,7 +8,7 @@ import com.freeworldone.honorpay.domain.models.body.RegisterGhostBody
 import com.freeworldone.honorpay.domain.models.body.UpdateBody
 import com.freeworldone.honorpay.domain.models.body.UploadProfilePicBody
 import com.freeworldone.honorpay.domain.models.response.*
-import com.freeworldone.honorpay.domain.models.runCatching
+import com.freeworldone.honorpay.domain.models.result
 import com.freeworldone.honorpay.domain.typeadapters.DateAdapter
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -84,11 +84,11 @@ object RestAdapter {
         fun user(@Query("id") id: Int): Deferred<UserResponse>
     }
 
-    suspend fun award(awardBody: AwardBody): Result<AwardResponse> = runCatching { api.award(awardBody).await() }
+    suspend fun award(awardBody: AwardBody): Result<AwardResponse> = api.award(awardBody).result()
 
-    suspend fun login(email: String, password: String): Result<LoginResponse> = runCatching { api.login(email, password).await() }
+    suspend fun login(email: String, password: String): Result<LoginResponse> = api.login(email, password).result()
 
-    suspend fun recent(): Result<List<RecentResponse>> = runCatching { api.recent(1).await() }
+    suspend fun recent(): Result<List<RecentResponse>> = api.recent(1).result()
 
     suspend fun newUser(firstName: String,
                         lastName: String,
@@ -101,29 +101,27 @@ object RestAdapter {
                         signature: String? = null,
                         userType: UserType = UserType.UNCONFIRMED,
                         notificationsAllowed: Boolean,
-                        remindersAllowed: Boolean): Result<NewUserResponse> = runCatching {
-        api.newUser(
-                firstName = firstName,
-                lastName = lastName,
-                nickname = nickname,
-                region = region,
-                country = country,
-                attributes = attributes,
-                email = email,
-                password = password,
-                signature = signature,
-                userType = userType.type,
-                notificationsAllowed = if (notificationsAllowed) 1 else 0,
-                remindersAllowed = if (remindersAllowed) 1 else 0).await()
-    }
+                        remindersAllowed: Boolean): Result<NewUserResponse> = api.newUser(
+            firstName = firstName,
+            lastName = lastName,
+            nickname = nickname,
+            region = region,
+            country = country,
+            attributes = attributes,
+            email = email,
+            password = password,
+            signature = signature,
+            userType = userType.type,
+            notificationsAllowed = if (notificationsAllowed) 1 else 0,
+            remindersAllowed = if (remindersAllowed) 1 else 0).result()
 
-    suspend fun registerGhost(registerGhostBody: RegisterGhostBody): Result<RegisterGhostResponse> = runCatching { api.registerGhost(registerGhostBody).await() }
+    suspend fun registerGhost(registerGhostBody: RegisterGhostBody): Result<RegisterGhostResponse> = api.registerGhost(registerGhostBody).result()
 
-    suspend fun search(txt: String): Result<SearchResponse> = runCatching { api.search(txt).await() }
+    suspend fun search(txt: String): Result<SearchResponse> = api.search(txt).result()
 
-    suspend fun update(updateBody: UpdateBody): Result<Nothing> = runCatching { api.update(updateBody).await() }
+    suspend fun update(updateBody: UpdateBody): Result<Nothing> = api.update(updateBody).result()
 
-    suspend fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Result<UploadProfilePicResponse> = runCatching { api.uploadProfilePic(uploadProfilePicBody).await() }
+    suspend fun uploadProfilePic(uploadProfilePicBody: UploadProfilePicBody): Result<UploadProfilePicResponse> = api.uploadProfilePic(uploadProfilePicBody).result()
 
-    suspend fun user(id: Int): Result<UserResponse> = runCatching { api.user(id).await() }
+    suspend fun user(id: Int): Result<UserResponse> = api.user(id).result()
 }

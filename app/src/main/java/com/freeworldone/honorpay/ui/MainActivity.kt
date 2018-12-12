@@ -7,9 +7,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.data.enums.UserType
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
+import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
-import kotlinx.coroutines.Job
+import com.freeworldone.honorpay.ui.base.extensions.log
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,33 +51,28 @@ class MainActivity : AppCompatActivity() {
 //                .setAvailableProviders(providers)
 //                .build(), RC_SIGN_IN)
 
-//        job = GlobalScope.launch(Dispatchers.IO) {
-//            val newUser = RestAdapter.newUser(
-//                    firstName = "FirstName",
-//                    lastName = "LastName",
-//                    nickname = "Nickname",
-//                    region = "Region",
-//                    country = "Country",
-//                    attributes = "Attributes",
-//                    email = "jim+test0001@ohno.run",
-//                    password = "testPw123",
-//                    signature = "Signature",
-//                    userType = UserType.UNCONFIRMED,
-//                    notificationsAllowed = true,
-//                    remindersAllowed = true)
-//
-//            val user = RestAdapter.user(1)
-//
-//
-//            val loginResponse = RestAdapter.login("jim+test0001@ohno.run", "testPw123")
-//
-//
-//            withContext(Dispatchers.Main) {
-//                log("$newUser")
-//                log("$user")
-//                log("$loginResponse")
-//            }
-//        }
+        job = GlobalScope.launch(Dispatchers.IO) {
+            val newUser = RestAdapter.newUser(
+                    firstName = "FirstName",
+                    lastName = "LastName",
+                    nickname = "Nickname",
+                    region = "Region",
+                    country = "Country",
+                    attributes = "Attributes",
+                    email = "jim+test0001@ohno.run",
+                    password = "testPw123",
+                    signature = "Signature",
+                    userType = UserType.UNCONFIRMED,
+                    notificationsAllowed = true,
+                    remindersAllowed = true)
+            val user = RestAdapter.user(1)
+            val loginResponse = RestAdapter.login("jim+test0001@ohno.run", "testPw123")
+            withContext(Dispatchers.Main) {
+                log("$newUser")
+                log("$user")
+                log("$loginResponse")
+            }
+        }
     }
 
     override fun onDestroy() {

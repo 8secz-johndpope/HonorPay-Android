@@ -2,6 +2,7 @@
 
 package com.freeworldone.honorpay.domain.models
 
+import kotlinx.coroutines.Deferred
 import java.io.Serializable
 
 
@@ -24,14 +25,8 @@ sealed class Result<T : Any> : Serializable {
     }
 }
 
-inline fun <R : Any> runCatching(block: () -> R): Result<R> = try {
-    Result.Success(block())
-} catch (e: Exception) {
-    Result.Failure(e)
-}
-
-inline fun <T, R : Any> T.runCatching(block: T.() -> R): Result<R> = try {
-    Result.Success(block())
+suspend fun <T: Any> Deferred<T>.result(): Result<T> = try {
+    Result.Success(await())
 } catch (e: Exception) {
     Result.Failure(e)
 }
