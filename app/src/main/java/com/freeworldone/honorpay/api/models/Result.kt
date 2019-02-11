@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.freeworldone.honorpay.domain.models
+package com.freeworldone.honorpay.api.models
 
 import kotlinx.coroutines.Deferred
 import java.io.Serializable

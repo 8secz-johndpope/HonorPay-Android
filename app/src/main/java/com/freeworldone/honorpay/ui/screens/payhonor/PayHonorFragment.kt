@@ -18,6 +18,6 @@ class PayHonorFragment : Fragment() {
             FragmentPayHonorBinding.inflate(inflater, container, false).also {
                 binding = it
                 binding.vm = viewModel
-                binding.setLifecycleOwner(this)
+                binding.lifecycleOwner = this
             }.root
 }

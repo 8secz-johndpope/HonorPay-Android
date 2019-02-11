@@ -1,4 +1,4 @@
-package com.freeworldone.honorpay.domain.models.body
+package com.freeworldone.honorpay.api.models.body
 
 data class LoginBody(
         val email: String,

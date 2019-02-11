@@ -1,7 +1,12 @@
 package com.freeworldone.honorpay.data.models
 
-//data class Honor(val id: Int,
-////                 val userFrom: Int,
-////                 val userTo: Int,
-////                 val message: String, //1000 byte text
-////                 val timestamp: Long)
+
+import com.squareup.moshi.Json
+import java.util.*
+
+data class Honor(
+        val id: Int = 0,
+        @Json(name = "user_from") val userFrom: Int = 0,
+        @Json(name = "user_to") val userTo: Int = 0,
+        val message: String? = null, //1000 byte text
+        val timestamp: Date? = null)

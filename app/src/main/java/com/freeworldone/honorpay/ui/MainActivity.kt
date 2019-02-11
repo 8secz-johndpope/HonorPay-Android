@@ -7,9 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.freeworldone.honorpay.R
+import com.freeworldone.honorpay.api.RestAdapter
 import com.freeworldone.honorpay.data.enums.UserType
 import com.freeworldone.honorpay.databinding.ActivityMainBinding
-import com.freeworldone.honorpay.domain.RestAdapter
 import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 import com.freeworldone.honorpay.ui.base.extensions.log
 import kotlinx.coroutines.*
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.vm = viewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
         NavigationUI.setupWithNavController(binding.collapsingToolbar, binding.toolbar, navController)
         setSupportActionBar(binding.toolbar)

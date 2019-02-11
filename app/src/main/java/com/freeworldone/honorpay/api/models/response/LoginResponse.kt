@@ -1,4 +1,4 @@
-package com.freeworldone.honorpay.domain.models.response
+package com.freeworldone.honorpay.api.models.response
 
 //TODO
 data class LoginResponse(

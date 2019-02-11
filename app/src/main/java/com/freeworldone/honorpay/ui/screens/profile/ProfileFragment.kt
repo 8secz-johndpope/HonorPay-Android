@@ -13,14 +13,14 @@ import com.freeworldone.honorpay.ui.base.extensions.getViewModel
 
 class ProfileFragment : Fragment() {
 
-    private val viewModel: ProfileViewModel by lazy { getViewModel { ProfileViewModel(ProfileFragmentArgs.fromBundle(arguments).user) } }
+    private val viewModel: ProfileViewModel by lazy { getViewModel { ProfileViewModel(ProfileFragmentArgs.fromBundle(arguments ?: Bundle()).user) } }
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             FragmentProfileBinding.inflate(inflater, container, false).also {
                 binding = it
                 binding.vm = viewModel
-                binding.setLifecycleOwner(this)
+                binding.lifecycleOwner = this
                 if (viewModel.user.get() == null) findNavController(this).navigate(R.id.login)
             }.root
 }

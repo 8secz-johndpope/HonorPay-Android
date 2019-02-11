@@ -1,6 +1,6 @@
-package com.freeworldone.honorpay.domain.models.body
+package com.freeworldone.honorpay.api.models.body
 
-data class RegisterGhostBody(
+data class UpdateBody(
         val auth_token: String,
         val first_name: String? = null,
         val last_name: String? = null,
@@ -9,7 +9,8 @@ data class RegisterGhostBody(
         val country: String? = null,
         val attributes: String? = null,
         val email: String? = null,
+        val password: String? = null,
         val signature: String? = null,
         val type: Int? = null,
-        val public_figure: Int? = null,
-        val image_data: String? = null)
+        val notifications: Int? = null,
+        val reminders: Int? = null)

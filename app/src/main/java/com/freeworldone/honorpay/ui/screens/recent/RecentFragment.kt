@@ -18,7 +18,7 @@ class RecentFragment : Fragment(), View.OnClickListener {
             FragmentRecentBinding.inflate(inflater, container, false).also {
                 binding = it
                 binding.vm = viewModel
-                binding.setLifecycleOwner(this)
+                binding.lifecycleOwner = this
                 //TODO: check observe methods, move adapter to viewModel?
 //                viewModel.recentHonors.observeForever { adapter.updateList(it ?: listOf()) }
             }.root
